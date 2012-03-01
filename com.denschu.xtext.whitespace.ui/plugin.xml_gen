@@ -9,7 +9,7 @@
             class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="txt"
+            extensions="whitespace"
             id="com.denschu.xtext.whitespace.MyDsl"
             name="MyDsl Editor">
         </editor>
@@ -140,13 +140,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="txt">
+			type="whitespace">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="txt">
+            uriExtension="whitespace">
         </resourceServiceProvider>
     </extension>
 
@@ -261,19 +261,19 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="com.denschu.xtext.whitespace.MyDsl.compare.contentViewers"
             class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="txt">
+            extensions="whitespace">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="com.denschu.xtext.whitespace.MyDsl.compare.contentMergeViewers"
             class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="txt" label="MyDsl Compare">
+            extensions="whitespace" label="MyDsl Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="com.denschu.xtext.whitespace.MyDsl.editors.documentProviders"
             class="com.denschu.xtext.whitespace.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="txt">
+            extensions="whitespace">
     </provider>
   </extension>
 
