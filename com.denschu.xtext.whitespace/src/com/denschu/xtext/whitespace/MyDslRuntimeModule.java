@@ -3,9 +3,17 @@
  */
 package com.denschu.xtext.whitespace;
 
+import org.eclipse.xtext.parser.IParser;
+
+import com.denschu.xtext.whitespace.parser.IndentMyDslParser;
+
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class MyDslRuntimeModule extends com.denschu.xtext.whitespace.AbstractMyDslRuntimeModule {
-
+	 @Override
+	 public Class<? extends IParser> bindIParser() {
+		 return IndentMyDslParser.class;
+	 }
 }
