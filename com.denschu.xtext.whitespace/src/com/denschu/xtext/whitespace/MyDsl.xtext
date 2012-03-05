@@ -4,7 +4,7 @@ generate myDsl "http://www.denschu.com/xtext/whitespace/MyDsl"
 
 Test:
 	//name=ID EOL
-	TAB keyword=Keyword (TAB INDENT arg+=Argument)* DEDENT EOL;
+	TAB keyword=Keyword (TAB arg+=Argument)* EOL;
 
 Keyword:
 	keyword=ID;
@@ -13,8 +13,6 @@ Argument:
 	arg=ID;
 
 terminal fragment WS: ' ';
-terminal ID: (('a'..'z') WS?)+;
-terminal TAB: (WS | '\t')+;
+terminal ID: ('a'..'z')+;// (WS ('a'..'z')+)*;
+terminal TAB: (WS WS | '\t')+;
 terminal EOL: ('\r'? '\n')+;
-terminal INDENT : '{';
-terminal DEDENT : '}';

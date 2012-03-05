@@ -1,11 +1,8 @@
 package com.denschu.xtext.whitespace.parser;
 
-import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenAcceptor;
-
-import com.denschu.xtext.whitespace.parser.antlr.internal.InternalMyDslLexer;
 
 /**
  * IndentTokenSource yields additional INDENT / DEDENT tokens for (\n+ \t*) NL
@@ -18,22 +15,14 @@ public class IndentTokenSource extends AbstractSplittingTokenSource {
 	@Override
 	protected boolean shouldSplitToken(Token token) {
 		System.out.println("shouldSplitToken: " + token.toString());
-		return token.getType() == InternalMyDslLexer.RULE_EOL || token.getType() == Token.EOF;
+		//return token.getType() == InternalMyDslLexer.RULE_EOL || token.getType() == Token.EOF;
+		return true;
 	}
 
 	@Override
 	protected void doSplitToken(Token token, ITokenAcceptor result) {
-		System.out.println("doSplitToken: " + token.toString());
-		int nextLevel = (token.getType() == Token.EOF) ? 0 : countTabs(token.getText());
-		while (this.level > nextLevel) {
-			this.level--;
-			result.accept(new CommonToken(InternalMyDslLexer.RULE_DEDENT, ""));
-		}
+		//System.out.println("doSplitToken: " + token.toString());
 		result.accept(token);
-		while (this.level < nextLevel) {
-			this.level++;
-			result.accept(new CommonToken(InternalMyDslLexer.RULE_INDENT, ""));
-		}
 	}
 
 	private int countTabs(String text) {
