@@ -10,23 +10,25 @@ import org.eclipse.xtext.parser.antlr.ITokenAcceptor;
  */
 public class IndentTokenSource extends AbstractSplittingTokenSource {
 
-	private int level;
+	private StringBuffer buffer;
+	private Token lastToken;
 
 	@Override
 	protected boolean shouldSplitToken(Token token) {
 		System.out.println("shouldSplitToken: " + token.toString());
-		//return token.getType() == InternalMyDslLexer.RULE_EOL || token.getType() == Token.EOF;
 		return true;
 	}
 
 	@Override
 	protected void doSplitToken(Token token, ITokenAcceptor result) {
-		//System.out.println("doSplitToken: " + token.toString());
+//		System.out.println("doSplitToken: " + token.toString());
+//		lastToken = token;
+//		if(token.getType() == InternalMyDslLexer.RULE_WS){
+//			buffer.append(token.getText());		
+//		}else{
+//			result.accept(token);			
+//		}
 		result.accept(token);
 	}
 
-	private int countTabs(String text) {
-		int firstTab = text.indexOf("\t");
-		return (firstTab == -1) ? 0 : text.length() - firstTab;
-	}
 }
