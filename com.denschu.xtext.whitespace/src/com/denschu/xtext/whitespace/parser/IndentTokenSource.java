@@ -1,8 +1,11 @@
 package com.denschu.xtext.whitespace.parser;
 
+import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenAcceptor;
+
+import com.denschu.xtext.whitespace.parser.antlr.internal.InternalMyDslLexer;
 
 /**
  * IndentTokenSource yields additional INDENT / DEDENT tokens for (\n+ \t*) NL
@@ -10,7 +13,6 @@ import org.eclipse.xtext.parser.antlr.ITokenAcceptor;
  */
 public class IndentTokenSource extends AbstractSplittingTokenSource {
 
-	private StringBuffer buffer;
 	private Token lastToken;
 
 	@Override
@@ -21,14 +23,12 @@ public class IndentTokenSource extends AbstractSplittingTokenSource {
 
 	@Override
 	protected void doSplitToken(Token token, ITokenAcceptor result) {
-//		System.out.println("doSplitToken: " + token.toString());
-//		lastToken = token;
-//		if(token.getType() == InternalMyDslLexer.RULE_WS){
-//			buffer.append(token.getText());		
-//		}else{
-//			result.accept(token);			
-//		}
-		result.accept(token);
+		lastToken = token;
+		if(lastToken.getType() == InternalMyDslLexer.RULE_WS && token.getType() == InternalMyDslLexer.RULE_WS){
+			result.accept(new CommonToken(InternalMyDslLexer.RULE_TAB, ""));	
+		}else{
+			result.accept(lastToken);
+		}
 	}
 
 }

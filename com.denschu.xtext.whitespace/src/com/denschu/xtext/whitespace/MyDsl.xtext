@@ -6,12 +6,16 @@ Test:
 	TAB keyword=Keyword (TAB arg+=Argument)* EOL;
 
 Keyword:
-	keyword=ID;
+	keyword=String;
 
 Argument:
-	arg=ID;
+	arg=String;
 
+String returns ecore::EString:
+	(ID|WS|OTHER)*;
+	
 terminal WS: ' ';
-terminal ID: ('a'..'z')+ ('a'..'z' | WS)*;
-terminal TAB: ('\t')+;
+terminal ID: ('a'..'z')+;
+terminal TAB: (WS WS | '\t')+;
 terminal EOL: ('\r'? '\n')+;
+terminal OTHER: .;
