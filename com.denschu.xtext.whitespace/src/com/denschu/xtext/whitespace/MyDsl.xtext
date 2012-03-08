@@ -3,16 +3,13 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate myDsl "http://www.denschu.com/xtext/whitespace/MyDsl"
 
 Test:
-	//name=ID EOL
 	TAB keyword=Keyword (TAB arg+=Argument)* EOL;
 
-Keyword:
-	keyword=ID;
+Keyword hidden() : ID (" " ID)*;
 
-Argument:
-	arg=ID;
-
-terminal fragment WS: ' ';
-terminal ID: ('a'..'z')+;// (WS ('a'..'z')+)*;
-terminal TAB: (WS WS | '\t')+;
+Argument hidden() : ID (" " ID)*;
+	
+terminal fragment WS: ('  ') (' ')*;
+terminal ID: ('a'..'z')+;
+terminal TAB: (WS | '\t')+;
 terminal EOL: ('\r'? '\n')+;
